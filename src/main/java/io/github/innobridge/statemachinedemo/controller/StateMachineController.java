@@ -16,17 +16,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@RestController
+@RestController("/statemachine")
 public class StateMachineController {
 
     @Autowired
     private StateMachineService stateMachineService;
-
-    @GetMapping("/hello")
-    public String hello() {
-
-        return "hello world";
-    }
 
     @PostMapping("/create/helloworld")
     public String createHelloWorld(
