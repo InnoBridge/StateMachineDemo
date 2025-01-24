@@ -11,6 +11,7 @@ import io.github.innobridge.statemachine.service.StateMachineService;
 import io.github.innobridge.statemachine.state.usecases.InitialHelloWorld;
 import io.github.innobridge.statemachine.state.usecases.childinstances.InitialMeal;
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,21 +24,21 @@ public class StateMachineController {
     private StateMachineService stateMachineService;
 
     @PostMapping("/create/helloworld")
-    public String createHelloWorld(
+    public Map<String, Object> createHelloWorld(
             @RequestBody(required = false) JsonNode input
     ) {
         return stateMachineService.createStateMachine(new InitialHelloWorld(), Optional.ofNullable(input), Optional.empty());
     }
 
     @PostMapping("/create/meal")
-    public String createMeal(
+    public Map<String, Object> createMeal(
             @RequestBody(required = false) JsonNode input
     ) {
         return stateMachineService.createStateMachine(new InitialMeal(), Optional.ofNullable(input), Optional.empty());
     }
 
     @PostMapping("/process")
-    public String processStateMachine(@RequestParam String instanceId,
+    public Map<String, Object> processStateMachine(@RequestParam String instanceId,
             @RequestBody(required = false) JsonNode input) {
         return stateMachineService.processStateMachine(instanceId, Optional.ofNullable(input));
     }
