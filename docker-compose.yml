@@ -5,7 +5,11 @@ services:
     image: openjdk:22-slim
     container_name: statemachine-application
     working_dir: /app
+    # For Linux: use network_mode: "host"
     network_mode: "host"
+    # For Mac: Comment out network_mode: "host" above and uncomment these lines:
+    # extra_hosts:
+    #   - "localhost:192.168.65.2"
     ports:
       - 8080:8080
       - 5005:5005
