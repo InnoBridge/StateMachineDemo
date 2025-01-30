@@ -53,7 +53,7 @@
 		<dependency>
 			<groupId>io.github.innobridge</groupId>
 			<artifactId>llmtools</artifactId>
-			<version>0.0.4</version>
+			<version>0.0.5</version>
 		</dependency>
 
 		<!-- OpenAPI/Swagger -->

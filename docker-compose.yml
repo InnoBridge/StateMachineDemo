@@ -13,13 +13,16 @@ services:
     ports:
       - 8080:8080
       - 5005:5005
-    env_file:
-      - .env
+    environment:
+      - WEATHER_API_KEY=$WEATHER_API_KEY
+      - BRAVE_SEARCH_API_KEY=$BRAVE_SEARCH_API_KEY
     volumes:
       - .:/app
       - /var/run/docker.sock:/var/run/docker.sock
       - ./local/root:/root
       - ../StateMachine:/StateMachine # Use for local development
+    # environment:
+      # - WEATHER_API_KEY=${WEATHER_API_KEY:-some_key}
     tty: true
     depends_on:
       - mongodb
