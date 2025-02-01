@@ -24,9 +24,9 @@ public class ChildTools extends AbstractChildToolState {
     }
 
     @Override
-    public void action(Optional<JsonNode> input) {
-        // TODO Auto-generated method stub
+    public void action(Map<String, Object> payload) {
         System.out.println("Child Tools");
+        payload.forEach((key, value) -> System.out.println(key + ": " + value));
     }
 
 }
