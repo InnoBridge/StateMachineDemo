@@ -9,6 +9,16 @@ import io.github.innobridge.statemachine.state.implementation.AbstractTerminalSt
 
 public class TerminalWeather extends AbstractTerminalState {
 
+    private String weather;
+
+    public TerminalWeather(String weather) {
+        this.weather = weather;
+    }
+
+    public String getWeather() {
+        return weather;
+    }
+
     @Override
     public void action(Optional<JsonNode> input) {
         System.out.println("Terminating weather");
@@ -16,7 +26,7 @@ public class TerminalWeather extends AbstractTerminalState {
 
     @Override
     public Optional<Map<String, Object>> getPayload() {
-        return Optional.empty();
+        return Optional.of(Map.of("message", getWeather()));
     }
     
 }

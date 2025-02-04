@@ -16,12 +16,21 @@ import io.github.innobridge.statemachinedemo.Application;
 public class GetWeather extends AbstractNonBlockingTransitionState {
 
     private Map<String, Object> arguments;
+    private String weather;
 
     public GetWeather(Map<String, Object> arguments) {
         super();
         this.arguments = arguments;
     }
     
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
+
     @Override
     public void action(Optional<JsonNode> input) {
         // TODO Auto-generated method stub
@@ -36,7 +45,8 @@ public class GetWeather extends AbstractNonBlockingTransitionState {
         WeatherService weatherService = new WeatherService(weatherClient, apiKey);
         Response result = weatherService.apply(arguments);
 
-        System.out.println(result);        
+        System.out.println(result.toString()); 
+        setWeather(result.toString());        
     }
 
 }

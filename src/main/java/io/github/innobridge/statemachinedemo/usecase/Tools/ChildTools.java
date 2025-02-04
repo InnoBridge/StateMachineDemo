@@ -16,6 +16,17 @@ import io.github.innobridge.statemachinedemo.usecase.Tools.weather.InitialWeathe
 
 public class ChildTools extends AbstractChildToolState {
 
+    private List<String> messages;
+
+    public ChildTools() {
+        super();
+        this.messages = List.of();
+    }
+
+    public List<String> getMessages() {
+        return messages;
+    }
+
     @Override
     public Map<String, Class<? extends InitialState>> registerChildInstanceMap() {
         // TODO Auto-generated method stub
@@ -26,7 +37,8 @@ public class ChildTools extends AbstractChildToolState {
     @Override
     public void action(Map<String, Object> payload) {
         System.out.println("Child Tools");
-        payload.forEach((key, value) -> System.out.println(key + ": " + value));
+        messages.add(payload.get("message").toString());
+        System.out.println(messages);
     }
 
 }

@@ -16,7 +16,11 @@ public class InitialTools extends AbstractInitialState {
     public void setTransitions() {
         Map<State, Function<State, State>> transitions = new HashMap<>();
         transitions.put(this,  state -> new ChildTools());
-        transitions.put(new ChildTools(),  state -> new TerminalTools());
+        transitions.put(new ChildTools(),  state -> {
+            ChildTools childTools = (ChildTools) state;
+            return new ToolResponse(childTools.getMessages());
+        });
+        transitions.put(new ToolResponse(null), state -> new TerminalTools());
         this.transitions = transitions;
     }
 

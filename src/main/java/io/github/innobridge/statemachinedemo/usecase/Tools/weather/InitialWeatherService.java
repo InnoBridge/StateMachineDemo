@@ -24,7 +24,10 @@ public class InitialWeatherService extends AbstractInitialState {
         // TODO Auto-generated method stub
         Map<State, Function<State, State>> transitions = new HashMap<>();
         transitions.put(this, state -> new GetWeather(getArguments()));
-        transitions.put(new GetWeather(null), state -> new TerminalWeather());
+        transitions.put(new GetWeather(null), state -> {
+            GetWeather getWeather = (GetWeather) state;
+            return new TerminalWeather(getWeather.getWeather());
+        });
         this.transitions = transitions;
     }
 

@@ -13,6 +13,7 @@ import io.github.innobridge.statemachinedemo.usecase.Tools.InitialTools;
 import io.github.innobridge.llmtools.tools.FunctionConverter;
 import io.github.innobridge.llmtools.tools.FunctionsExecutor;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +46,7 @@ public class ChatController {
                     @RequestParam String prompt,
                     @RequestParam String model
     ) {
-        ChatRequest chatRequest = ChatRequest.builder()
+        ChatRequest toolRequest = ChatRequest.builder()
                 .messages(
                     List.of(
                         Message.builder()
@@ -58,18 +59,36 @@ public class ChatController {
                 .stream(false)
                 .build();
 
-        FunctionsExecutor result = ollamaTools.functionCall(chatRequest, List.of(
+        FunctionsExecutor functionCalls = ollamaTools.functionCall(toolRequest, List.of(
             new Tool(FUNCTION, FunctionConverter.convertToToolFunction(WeatherService.class)),
             new Tool(FUNCTION, FunctionConverter.convertToToolFunction(BraveSearchService.class))
         ));
 
-        result.getFunctionCalls().forEach(
-            functionCall -> {
-                System.out.println(functionCall.getName() + " : " + functionCall.getArguments());
-            }
-        );
+        ChatRequest chatRequest = ChatRequest.builder()
+                .model(model)
+                .stream(false)
+                .build();
 
-        chatService.toolUse(new InitialTools(), result.getFunctionCalls());
+        if (functionCalls.getFunctionCalls().isEmpty()) {
+            chatRequest.setMessages(List.of(
+                Message.builder()
+                    .role("user")
+                    .content(prompt)
+                    .build()
+            ));
+            return Map.of("response", ollamaClient.chat(chatRequest).block());
+        }
+        List<Message> messages = chatService.toolUse(new InitialTools(), functionCalls.getFunctionCalls());
+
+        List<Message> finalMessages = new ArrayList<>();
+        finalMessages.add(Message.builder()
+            .role("system")
+            .content("You are a helpful assistant. Use the provided context to answer questions directly. Do not ask to use tools.")
+            .build());
+        finalMessages.addAll(messages);
+        finalMessages.add(Message.builder().role("user").content(prompt).build());
+        
+        chatRequest.setMessages(finalMessages);
 
         ChatResponse response = ollamaClient.chat(chatRequest).block();
         return Map.of("response",   response);

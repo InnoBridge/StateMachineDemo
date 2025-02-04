@@ -24,7 +24,10 @@ public class InitialSearch extends AbstractInitialState {
         // TODO Auto-generated method stub
         Map<State, Function<State, State>> transitions = new HashMap<>();
         transitions.put(this, state -> new BraveSearch(getArguments()));
-        transitions.put(new BraveSearch(null), state -> new TerminalSearch());
+        transitions.put(new BraveSearch(null), state -> {
+            BraveSearch braveSearch = (BraveSearch) state;
+            return new TerminalSearch(braveSearch.getSearch());
+        });
         this.transitions = transitions;
     }
 

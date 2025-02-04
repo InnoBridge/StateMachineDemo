@@ -1,5 +1,6 @@
 package io.github.innobridge.statemachinedemo.usecase.Tools.search;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -17,9 +18,19 @@ public class BraveSearch extends AbstractNonBlockingTransitionState {
 
     private Map<String, Object> arguments;
 
+    private String seach;
+
     public BraveSearch(Map<String, Object> arguments) {
         super();
         this.arguments = arguments;
+    }
+
+    public String getSearch() {
+        return seach;
+    }
+
+    public void setSeach(String seach) {
+        this.seach = seach;
     }
 
     @Override
@@ -37,6 +48,7 @@ public class BraveSearch extends AbstractNonBlockingTransitionState {
         Response result = braveSearchService.apply(arguments);
 
         System.out.println(result);
+        setSeach(result.toString());        
     }
     
 }
