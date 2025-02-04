@@ -46,7 +46,14 @@
 		<dependency>
 			<groupId>io.github.innobridge</groupId>
 			<artifactId>statemachine</artifactId>
-			<version>0.0.2-SNAPSHOT-2</version>
+			<version>1.0.0</version>
+		</dependency>
+
+		<!-- InnoBridge LLMTools -->
+		<dependency>
+			<groupId>io.github.innobridge</groupId>
+			<artifactId>llmtools</artifactId>
+			<version>0.0.5</version>
 		</dependency>
 
 		<!-- OpenAPI/Swagger -->
