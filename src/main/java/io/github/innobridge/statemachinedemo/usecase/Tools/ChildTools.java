@@ -36,9 +36,7 @@ public class ChildTools extends AbstractChildToolState {
 
     @Override
     public void action(Map<String, Object> payload) {
-        System.out.println("Child Tools");
         messages.add(payload.get("message").toString());
-        System.out.println(messages);
     }
 
 }

@@ -33,8 +33,6 @@ public class GetWeather extends AbstractNonBlockingTransitionState {
 
     @Override
     public void action(Optional<JsonNode> input) {
-        // TODO Auto-generated method stub
-        System.out.println("Getting weather");
         Environment env = Application.getEnvironment();
         String apiKey = env.getProperty("weather.api.key");
         String baseUrl = env.getProperty("weather.api.baseurl");

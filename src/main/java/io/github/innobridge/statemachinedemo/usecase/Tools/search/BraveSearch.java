@@ -35,8 +35,6 @@ public class BraveSearch extends AbstractNonBlockingTransitionState {
 
     @Override
     public void action(Optional<JsonNode> input) {
-        // TODO Auto-generated method stub
-        System.out.println("Brave Search");
         Environment env = Application.getEnvironment();
         String apiKey = env.getProperty("bravesearch.api.key");
         String baseUrl = env.getProperty("bravesearch.api.baseurl");
