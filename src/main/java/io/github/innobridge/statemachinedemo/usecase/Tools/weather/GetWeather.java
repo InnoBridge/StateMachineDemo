@@ -43,7 +43,6 @@ public class GetWeather extends AbstractNonBlockingTransitionState {
         WeatherService weatherService = new WeatherService(weatherClient, apiKey);
         Response result = weatherService.apply(arguments);
 
-        System.out.println(result.toString()); 
         setWeather(result.toString());        
     }
 
