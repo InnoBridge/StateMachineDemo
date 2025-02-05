@@ -18,7 +18,7 @@ public class BraveSearch extends AbstractNonBlockingTransitionState {
 
     private Map<String, Object> arguments;
 
-    private String seach;
+    private String search;
 
     public BraveSearch(Map<String, Object> arguments) {
         super();
@@ -26,11 +26,11 @@ public class BraveSearch extends AbstractNonBlockingTransitionState {
     }
 
     public String getSearch() {
-        return seach;
+        return search;
     }
 
     public void setSeach(String seach) {
-        this.seach = seach;
+        this.search = seach;
     }
 
     @Override
