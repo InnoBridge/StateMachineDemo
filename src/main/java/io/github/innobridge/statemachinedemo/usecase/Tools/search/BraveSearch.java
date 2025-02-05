@@ -29,8 +29,8 @@ public class BraveSearch extends AbstractNonBlockingTransitionState {
         return search;
     }
 
-    public void setSeach(String seach) {
-        this.search = seach;
+    public void setSearch(String search) {
+        this.search = search;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class BraveSearch extends AbstractNonBlockingTransitionState {
         BraveSearchService braveSearchService = new BraveSearchService(apiKey, braveSearchClient);
         Response result = braveSearchService.apply(arguments);
 
-        setSeach(result.toString());        
+        setSearch(result.toString());        
     }
     
 }
