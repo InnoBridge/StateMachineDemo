@@ -21,7 +21,6 @@ public class InitialWeatherService extends AbstractInitialState {
 
     @Override
     public void setTransitions() {
-        // TODO Auto-generated method stub
         Map<State, Function<State, State>> transitions = new HashMap<>();
         transitions.put(this, state -> new GetWeather(getArguments()));
         transitions.put(new GetWeather(null), state -> {
