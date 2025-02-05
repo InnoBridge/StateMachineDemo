@@ -35,9 +35,6 @@ public class ChatController {
     @Autowired
     private Tools ollamaTools;
 
-    // @Autowired
-    // private StateMachineService stateMachineService;
-
     @Autowired
     private ChatService chatService;
 
