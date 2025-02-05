@@ -45,7 +45,6 @@ public class BraveSearch extends AbstractNonBlockingTransitionState {
         BraveSearchService braveSearchService = new BraveSearchService(apiKey, braveSearchClient);
         Response result = braveSearchService.apply(arguments);
 
-        System.out.println(result);
         setSeach(result.toString());        
     }
     
