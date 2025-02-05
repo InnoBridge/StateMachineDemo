@@ -29,7 +29,6 @@ public class ChildTools extends AbstractChildToolState {
 
     @Override
     public Map<String, Class<? extends InitialState>> registerChildInstanceMap() {
-        // TODO Auto-generated method stub
         return Map.of(FunctionConverter.getAnnotatedName(WeatherService.class), InitialWeatherService.class,
                 FunctionConverter.getAnnotatedName(BraveSearchService.class), InitialSearch.class);
     }
